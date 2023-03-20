@@ -1,0 +1,17 @@
+<!-- news_items.html -->
+{% extends "news/base.html" %}
+
+{% block content %}
+  <div class="container">
+    <h1>Latest 20 News</h1>
+    <ul>
+      {% for news_item in news_items %}
+      <li class="news-item">
+        <h2>{{ news_item.title }}</h2>
+        <p>{{ news_item.description }}</p>
+        <p>{{ news_item.published_at }}</p>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+{% endblock %}

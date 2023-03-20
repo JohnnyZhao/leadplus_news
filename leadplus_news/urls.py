@@ -15,7 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from news.views import news_items_api, news_items_page
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path("api/news_items/", news_items_api, name="news_items_api"),
+    path("news_page/", news_items_page, name="news_items_page"),
 ]
