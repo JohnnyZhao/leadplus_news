@@ -1,12 +1,18 @@
+from django.views.generic import ListView
+from django.utils import timezone
 from django.http import JsonResponse
-from django.shortcuts import render
 from .models import NewsItem
 
-def news_items_page(request):
+class LatestNews(ListView):
     #render the latest 20 news entries as a html page
-    news_items = NewsItem.objects.order_by("-published_at")[:20]
-    return render(request, "news/news_page.html",
-                  {"news_items": news_items})
+    model = NewsItem
+    template_name = 'news/latest.html'
+    context_object_name = 'news_items'
+    paginate_by = 20
+
+
+    def get_queryset(self):
+        return NewsItem.objects.filter(published_at__lte=timezone.now()).order_by('-published_at')
 
 def news_items_api(request):
     #return the latest 100 news entries as JSON
