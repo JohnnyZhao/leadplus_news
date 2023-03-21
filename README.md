@@ -24,14 +24,14 @@ This is a Django project for Leadplus assignment which fetches news items from t
 This project is based on `python3.10.9`, make sure you have at least `python3.10.9+` and `pip3` installed.
 You can find more information about the latest python version here: https://www.python.org/downloads/
 
-### 1. clone reposetup virtual env
+### 1. Clone repo
 
 ```bash
 git clone git@github.com:JohnnyZhao/leadplus_news.git
 
 ```
 
-### 2. setup virtual environment and install requirements
+### 2. Setup virtual environment and install requirements
 
 Change working directory and make an virtual environment called `.leadplus_news_env` inside the root of codebase:
 
@@ -49,7 +49,7 @@ Install dependencies:
 pip3 install -r requirements.txt
 ```
 
-### 3. config API key
+### 3. Config [newsapi.org](https://newsapi.org) API key
 
 Copy the sample config file under news folder `news/config.py.sample`
 
@@ -65,7 +65,7 @@ NEWS_API_KEY="REPLACE THIS WITH A VALID API KEY"
 
 ```
 
-### 4. Migrate database and fetch news data
+### 4. Migrate database and populate news items
 
 Migrate database:
 
@@ -73,13 +73,13 @@ Migrate database:
 ./manage.py migrate
 ```
 
-Fetch latest news data from newsapi.org via command `fetch_news`.
+Fetch latest 100 news articles from [newsapi.org](https://newsapi.org) via command `fetch_news`.
 You need to specify a topic of news you want to fetch, for example `tech` news:
 
 ```
 ./manage.py fetch_news tech
 ```
-which will fetch and save the latest 100 news and save it to database.
+Which will fetch the latest 100 news and save it to database.
 
 
 ### 5. Start Server
@@ -90,7 +90,7 @@ which will fetch and save the latest 100 news and save it to database.
 
 Now you can visit http://127.0.0.1:8000/ in your preferred browser to check it.
 
-### [Optional]6. Create super user and access django admin site
+### 6. [Optional] Create super user and access django admin site
 
 Create a super user via:
 
@@ -98,4 +98,4 @@ Create a super user via:
 ./manage.py createsuperuser
 ```
 
-Now you can login to http://127.0.0.1:8000/admin and check the NewsItem records.
+Now you can login to http://127.0.0.1:8000/admin to check and manage news records in database.
