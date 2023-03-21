@@ -1,101 +1,107 @@
 # Leadplus News Project
 
 ## About
-This is a Django project for Leadplus assignment which fetches news items from the [News API](https://newsapi.org) and stores them in a database. 
+
+This is a Django project for the Leadplus assignment, which fetches news items from the [News API](https://newsapi.org) and stores them in a database. The project provides a home page that displays the latest 20 news items, an API that returns the latest 100 news items, and a command to fetch the latest 100 news items under a certain topic and save them to the database.
 
 ## Functionalities
 
-1. A home page displays the latest 20 news:
-    http://127.0.0.1:8000/
-2. An API which returns the latest 100 news:
-    http://127.0.0.1:8000/api/news_items
-3. A command to fetch the latest 100 news under certain topic and save it to database.
+1. A home page displays the latest 20 news items: http://127.0.0.1:8000/
+2. An API which returns the latest 100 news items: http://127.0.0.1:8000/api/news_items
+3. A command to fetch the latest 100 news items under a certain topic and save them to the database:
     ```bash
     ./manage.py fetch_news [TOPIC]
     ```
-    For example, fetching top 100 news under topic `ai` would be:
+    For example, fetching the top 100 news items under the topic `ai` would be:
     ```bash
     ./manage.py fetch_news ai
     ```
 
-## How to setup
+## How to set up
 
-### 0. Before you start
-This project is based on `python3.10.9`, make sure you have at least `python3.10.9+` and `pip3` installed.
-You can find more information about the latest python version here: https://www.python.org/downloads/
+### Prerequisites
 
-### 1. Clone repo
+This project is based on `Python 3.10.9`. Please ensure that you have at least `Python 3.10.9+` and `pip3` installed. You can find more information about the latest Python version here: https://www.python.org/downloads/
 
-```bash
-git clone git@github.com:JohnnyZhao/leadplus_news.git
+### Step-by-step instructions
 
-```
+1. Clone the repository:
 
-### 2. Setup virtual environment and install requirements
+    ```bash
+    git clone git@github.com:JohnnyZhao/leadplus_news.git
+    ```
 
-Change working directory and make an virtual environment called `.leadplus_news_env` inside the root of codebase:
+2. Setup a virtual environment and install requirements:
 
-```bash
-cd leadplus_news
+    Change to the project directory:
 
-python3 -m venv .leadplus_news_env
+    ```bash
+    cd leadplus_news
+    ```
 
-source ./.leadplus_news_env/bin/activate
-```
+    Create a virtual environment called `.leadplus_news_env`:
 
-Install dependencies:
+    ```bash
+    python3 -m venv .leadplus_news_env
+    ```
 
-```bash
-pip3 install -r requirements.txt
-```
+    Activate the virtual environment:
 
-### 3. Config [newsapi.org](https://newsapi.org) API key
+    ```bash
+    source ./.leadplus_news_env/bin/activate
+    ```
 
-Copy the sample config file under news folder `news/config.py.sample`
+    Install dependencies:
 
-```bash
-cp news/config.py.sample news/config.py
-```
+    ```bash
+    pip3 install -r requirements.txt
+    ```
 
-Change the value of NEWS_API_KEY in `news/config.py` to a valid API Key for newsapi.org and save it:
+3. Configuring the [News API](https://newsapi.org) key:
 
-```python
-#API key for newsapi.org, config it before fetch news
-NEWS_API_KEY="REPLACE THIS WITH A VALID API KEY"
+    Copy the sample config file under the `news` folder `news/config.py.sample`:
 
-```
+    ```bash
+    cp news/config.py.sample news/config.py
+    ```
 
-### 4. Migrate database and populate news items
+    Change the value of `NEWS_API_KEY` in `news/config.py` to a valid API Key from newsapi.org and save it:
 
-Migrate database:
+    ```python
+    # API key for News API, config it before fetching news
+    NEWS_API_KEY="REPLACE THIS WITH A VALID API KEY"
+    ```
 
-```bash
-./manage.py migrate
-```
+4. Migrate the database and populate news items:
 
-Fetch latest 100 news articles from [newsapi.org](https://newsapi.org) via command `fetch_news`.
-You need to specify a topic of news you want to fetch, for example `tech` news:
+    Migrate the database:
 
-```
-./manage.py fetch_news tech
-```
-Which will fetch the latest 100 news and save it to database.
+    ```bash
+    ./manage.py migrate
+    ```
 
+    Fetch the latest 100 news items from [News API](https://newsapi.org) via the `fetch_news` command. You need to specify a topic of news you want to fetch, for example, `tech` news:
 
-### 5. Start Server
+    ```
+    ./manage.py fetch_news tech
+    ```
 
-```bash
-./manage.py runserver
-```
+    This will fetch the latest 100 news items and save them to the database.
 
-Now you can visit http://127.0.0.1:8000/ in your preferred browser to check it.
+5. Start the server:
 
-### 6. [Optional] Create super user and access django admin site
+    ```bash
+    ./manage.py runserver
+    ```
 
-Create a super user via:
+    You can now visit http://127.0.0.1:8000/ in your preferred browser to check it.
 
-```bash
-./manage.py createsuperuser
-```
+6. [Optional] Create a superuser and access Django admin site:
 
-Now you can login to http://127.0.0.1:8000/admin to check and manage news records in database.
+    Create a superuser via:
+
+    ```bash
+    ./manage.py createsuperuser
+    ```
+
+    You can now log in to http://127.0.0.1:8000/admin to check and manage news records in the database.
