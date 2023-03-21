@@ -13,9 +13,13 @@ class Command(BaseCommand):
     help = """Fetches the most recently-published news items from the 
     News API and stores them in the database."""
 
+    def add_arguments(self, parser):
+        parser.add_argument('topic', type=str, help='Topic of news')
+
     def handle(self, *args, **options):
         # q is required to call this api
-        url = f"https://newsapi.org/v2/everything?q=ai&apiKey={NEWS_API_KEY}&pageSize=100"
+        topic = options['topic']
+        url = f"https://newsapi.org/v2/everything?q={topic}&apiKey={NEWS_API_KEY}&pageSize=100"
         response = requests.get(url)
         if response.status_code != 200:
             self.stdout.write(self.style.ERROR("request failed, status code:%d, error details:\n %s" % (
