@@ -12,10 +12,10 @@ class NewsItem(models.Model):
     title = models.CharField(max_length=200)
     author = models.CharField(max_length=50, null=True)
     description = models.TextField()
-    url = models.URLField(max_length=200)
+    url = models.URLField()
     # md5 hash of 'url' to prevent duplicates of the same article
     md5 = models.CharField(max_length=32, unique=True, null=True)
-    content = models.URLField(max_length=200)
+    content = models.TextField()
     published_at = models.DateTimeField()
 
     def __str__(self):
