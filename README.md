@@ -21,7 +21,7 @@ This is a Django project for Leadplus assignment which fetches news items from t
 ## How to setup
 
 ### 0. Before you start
-This project is based on `python3.10.9`, make sure you have at least `python3.10` and `pip3` installed.
+This project is based on `python3.10.9`, make sure you have at least `python3.10.9+` and `pip3` installed.
 You can find more information about the latest python version here: https://www.python.org/downloads/
 
 ### 1. clone reposetup virtual env
