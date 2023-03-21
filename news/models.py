@@ -1,4 +1,7 @@
 from django.db import models
+from django.core.exceptions import ValidationError
+from django.core.validators import URLValidator
+from django.utils.html import escape
 
 
 class NewsItem(models.Model):
@@ -17,3 +20,17 @@ class NewsItem(models.Model):
 
     def __str__(self):
         return str(self.title)
+
+    def save(self, *args, **kwargs):
+        # escape fields before save
+        for field_name in ['title', 'author', 'description', 'content']:
+            field_value = getattr(self, field_name)
+            setattr(self, field_name, escape(field_value))
+        # validate url field
+        url_validator = URLValidator()
+        try:
+            url_validator(self.url)
+        except ValidationError as err:
+            raise ValidationError({'url validation error': err.message})
+
+        super().save(*args, **kwargs)
