@@ -130,3 +130,6 @@ dmypy.json
 
 #vscode
 .vscode
+
+#ignore news config.py
+news/config.py
