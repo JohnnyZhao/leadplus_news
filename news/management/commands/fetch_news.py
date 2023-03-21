@@ -3,6 +3,7 @@ import hashlib
 import pytz
 import requests
 from django.core.management.base import BaseCommand
+from django.core.exceptions import ValidationError
 from django.db import IntegrityError
 from news.models import NewsItem
 from news.config import NEWS_API_KEY
@@ -14,7 +15,7 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         # q is required to call this api
-        url = f"https://newsapi.org/v2/everything?q=tech&apiKey={NEWS_API_KEY}&pageSize=100"
+        url = f"https://newsapi.org/v2/everything?q=ai&apiKey={NEWS_API_KEY}&pageSize=100"
         response = requests.get(url)
         if response.status_code != 200:
             self.stdout.write(self.style.ERROR("request failed, status code:%d, error details:\n %s" % (
@@ -47,6 +48,9 @@ class Command(BaseCommand):
                 articles_added += 1
             except IntegrityError:
                 self.stdout.write(self.style.WARNING(
-                    "Existing article:%s" % url))
+                    f"Article ignored, already exist:{url}"))
+            except ValidationError:
+                self.stdout.write(self.style.WARNING(
+                    f"Article ignored, invalid url:{url}"))
         self.stdout.write(self.style.SUCCESS(
             "%d news items successfully fetched and %d added in the database." % (len(news_items), articles_added)))
