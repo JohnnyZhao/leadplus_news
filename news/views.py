@@ -20,6 +20,7 @@ class LatestNews(ListView):
 
 
 class LatestNewsAPI(APIView):
+    """render the latest 100 news entries"""
 
     def get(self, request):
         queryset = NewsItem.objects.order_by('-published_at')[:100]
