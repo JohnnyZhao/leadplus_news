@@ -21,7 +21,7 @@ class NewsItem(models.Model):
     def __str__(self):
         return str(self.title)
 
-    def clean(self):
+    def save(self, *args, **kwargs):
         # escape fields before save
         for field_name in ['title', 'author', 'description', 'content']:
             field_value = getattr(self, field_name)
@@ -33,4 +33,4 @@ class NewsItem(models.Model):
         except ValidationError as err:
             raise ValidationError({'url validation error': err.message})
 
-        super().clean()
+        super().save(*args, **kwargs)
