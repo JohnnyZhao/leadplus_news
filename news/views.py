@@ -1,7 +1,9 @@
 from django.views.generic import ListView
 from django.utils import timezone
-from django.http import JsonResponse
+from rest_framework.views import APIView
+from rest_framework.response import Response
 from .models import NewsItem
+from .serializers import NewsItemSerializer
 
 
 class LatestNews(ListView):
@@ -17,9 +19,10 @@ class LatestNews(ListView):
             published_at__lte=timezone.now()).order_by('-published_at')
 
 
-def news_items_api(request):
-    """Get latest 100 news"""
-    # return the latest 100 news entries as JSON
-    news_items = NewsItem.objects.order_by("-published_at")[:100]
-    data = {"news_items": list(news_items.values())}
-    return JsonResponse(data)
+class LatestNewsAPI(APIView):
+    """render the latest 100 news entries"""
+
+    def get(self, request):
+        queryset = NewsItem.objects.order_by('-published_at')[:100]
+        serializer = NewsItemSerializer(queryset, many=True)
+        return Response(serializer.data)
