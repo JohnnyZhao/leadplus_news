@@ -5,11 +5,11 @@ This is a Django project for Leadplus assignment which fetches news items from t
 
 ## Functionalities
 
-1. A home page displays latest 20 news in database
+1. A home page displays the latest 20 news:
     http://127.0.0.1:8000/
-2. An API which returns the latest 100 from database
+2. An API which returns the latest 100 news:
     http://127.0.0.1:8000/api/news_items
-3. A command to fetch the latest 100 news under certain topic and save it to database
+3. A command to fetch the latest 100 news under certain topic and save it to database.
     ```bash
     ./manage.py fetch_news [TOPIC]
     ```
@@ -21,7 +21,8 @@ This is a Django project for Leadplus assignment which fetches news items from t
 ## How to setup
 
 ### 0. Before you start
-This project is based on `python3`, make sure you have `python3` and `pip3` installed
+This project is based on `python3.10.9`, make sure you have at least `python3.10` and `pip3` installed.
+You can find more information about the latest python version here: https://www.python.org/downloads/
 
 ### 1. clone reposetup virtual env
 
@@ -39,7 +40,7 @@ cd leadplus_news
 
 python3 -m venv .leadplus_news_env
 
-source ./leadplus_news_env/bin/activate
+source ./.leadplus_news_env/bin/activate
 ```
 
 Install dependencies:
@@ -50,13 +51,13 @@ pip3 install -r requirements.txt
 
 ### 3. config API key
 
-Copy the sample config file under news/config.py.sample
+Copy the sample config file under news folder `news/config.py.sample`
 
 ```bash
 cp news/config.py.sample news/config.py
 ```
 
-Change the value of NEWS_API_KEY to a valid API Key for newsapi.org and save it
+Change the value of NEWS_API_KEY in `news/config.py` to a valid API Key for newsapi.org and save it:
 
 ```python
 #API key for newsapi.org, config it before fetch news
@@ -78,7 +79,7 @@ You need to specify a topic of news you want to fetch, for example `tech` news:
 ```
 ./manage.py fetch_news tech
 ```
-which will fetch and save the latest 100 news and save it to database
+which will fetch and save the latest 100 news and save it to database.
 
 
 ### 5. Start Server
@@ -88,3 +89,13 @@ which will fetch and save the latest 100 news and save it to database
 ```
 
 Now you can visit http://127.0.0.1:8000/ in your preferred browser to check it.
+
+### [Optional]6. Create super user and access django admin site
+
+Create a super user via:
+
+```bash
+./manage.py createsuperuser
+```
+
+Now you can login to https://127.0.0.1:8000/admin and check the NewsItem records.
