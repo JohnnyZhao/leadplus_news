@@ -8,9 +8,11 @@
       {% for news_item in news_items %}
       <li class="news-item">
         {% autoescape off %}
+        <a href="{{news_item.url}}" target="_blank" class="news-item-link">
           <h2>{{ news_item.title }}</h2>
           <p>{{ news_item.description }}</p>
-          <p>{{ news_item.published_at }}</p>
+          <small>{{ news_item.published_at }}</small>
+        </a>
         {% endautoescape %}
       </li>
       {% endfor %}
