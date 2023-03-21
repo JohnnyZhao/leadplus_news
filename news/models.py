@@ -11,7 +11,7 @@ class NewsItem(models.Model):
     description = models.TextField()
     url = models.URLField(max_length=200)
     # md5 hash of 'url' to prevent duplicates of the same article
-    md5 = models.CharField(max_length=16, unique=True, null=True)
+    md5 = models.CharField(max_length=32, unique=True, null=True)
     content = models.URLField(max_length=200)
     published_at = models.DateTimeField()
 
