@@ -33,7 +33,7 @@ git clone git@github.com:JohnnyZhao/leadplus_news.git
 
 ### 2. setup virtual environment and install requirements
 
-Change working directory and make an virtual environment called `.leadplus_news_env`:
+Change working directory and make an virtual environment called `.leadplus_news_env` inside the root of codebase:
 
 ```bash
 cd leadplus_news
@@ -61,7 +61,7 @@ Change the value of NEWS_API_KEY in `news/config.py` to a valid API Key for news
 
 ```python
 #API key for newsapi.org, config it before fetch news
-NEWS_API_KEY="VALID API KEY"
+NEWS_API_KEY="REPLACE THIS WITH A VALID API KEY"
 
 ```
 
@@ -98,4 +98,4 @@ Create a super user via:
 ./manage.py createsuperuser
 ```
 
-Now you can login to https://127.0.0.1:8000/admin and check the NewsItem records.
+Now you can login to http://127.0.0.1:8000/admin and check the NewsItem records.
