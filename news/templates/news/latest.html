@@ -7,9 +7,11 @@
     <ul>
       {% for news_item in news_items %}
       <li class="news-item">
-        <h2>{{ news_item.title }}</h2>
-        <p>{{ news_item.description }}</p>
-        <p>{{ news_item.published_at }}</p>
+        {% autoescape off %}
+          <h2>{{ news_item.title }}</h2>
+          <p>{{ news_item.description }}</p>
+          <p>{{ news_item.published_at }}</p>
+        {% endautoescape %}
       </li>
       {% endfor %}
     </ul>
