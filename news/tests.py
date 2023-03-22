@@ -1,11 +1,8 @@
 import hashlib
 import pytz
-from io import StringIO
 from datetime import datetime, timezone, timedelta
-from django.test import TestCase, override_settings
+from django.test import TestCase
 from django.urls import reverse
-from django.core.management import call_command
-from unittest.mock import patch, MagicMock
 from rest_framework import status
 from rest_framework.test import APIClient
 from .models import NewsItem
