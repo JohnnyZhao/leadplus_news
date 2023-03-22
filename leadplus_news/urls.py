@@ -19,6 +19,6 @@ from news.views import LatestNewsAPI, LatestNews
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path("", LatestNews.as_view(), name="latest_news_page"),
-    path("api/news_items/", LatestNewsAPI.as_view(), name="news_items_api"),
+    path("", LatestNews.as_view(), name="latest-news-page"),
+    path("api/news_items/", LatestNewsAPI.as_view(), name="news-items-api"),
 ]

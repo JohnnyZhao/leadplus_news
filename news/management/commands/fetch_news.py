@@ -1,5 +1,4 @@
 from datetime import datetime
-import hashlib
 import pytz
 import requests
 from django.core.management.base import BaseCommand
@@ -32,7 +31,6 @@ class Command(BaseCommand):
             description = news["description"]
             author = news["author"]
             url = news["url"]
-            md5 = hashlib.md5(url.encode('utf-8')).hexdigest()
             content = news["content"]
 
             # publishAt is a datetime string, eg. "2011-11-04T00:05:23Z"
@@ -42,13 +40,13 @@ class Command(BaseCommand):
             published_at = pytz.utc.localize(published_at)
 
             try:
-                NewsItem.objects.create(title=title,
-                                        description=description,
-                                        author=author,
-                                        url=url,
-                                        md5=md5,
-                                        content=content,
-                                        published_at=published_at)
+                news = NewsItem(title=title,
+                                description=description,
+                                author=author,
+                                url=url,
+                                content=content,
+                                published_at=published_at)
+                news.save()
                 articles_added += 1
             except IntegrityError:
                 self.stdout.write(self.style.WARNING(
@@ -58,3 +56,5 @@ class Command(BaseCommand):
                     f"Article ignored, invalid url:{url}"))
         self.stdout.write(self.style.SUCCESS(
             "%d news items successfully fetched and %d added in the database." % (len(news_items), articles_added)))
+
+
